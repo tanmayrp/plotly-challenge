@@ -77,6 +77,7 @@ function buildBubbleChart(samples, selectedNameIndex){
         marker: {
           size: sampleList,
           color: OTUIdList,
+          colorscale: "Earth"
         },
         text: OTULabelsList,
       };
@@ -93,18 +94,20 @@ function buildBubbleChart(samples, selectedNameIndex){
       Plotly.newPlot("bubble", data, layout);
 }
 
+
 /**
  * Main driver for the entire page
  * @param {string} selectedName: selected name for the test subject; default 940
  */
 function buildPlots(selectedName) {
-    d3.json("../../data/samples.json").then((data) => {
+    d3.json("../samples.json").then((data) => {
         var names = data.names;
+        var firstSample = names[0];
         var metadata = data.metadata;
         var samples = data.samples;
 
         //Set drop down values while defaulting to 940 on page load
-        setSubjectIDDropDown(names, selectedName);
+        setSubjectIDDropDown(names, firstSample);
 
         //get selected index 
         var selectedNameIndex = names.indexOf(d3.select("#selDataset").property("value"));
@@ -112,12 +115,12 @@ function buildPlots(selectedName) {
         buildDemographicInfo(metadata[selectedNameIndex]);
         buildBarChart(samples, selectedNameIndex);
         buildBubbleChart(samples, selectedNameIndex);
+        buildGauge(metadata[selectedNameIndex].wfreq);
     });
 }
 
 function optionChanged(userSelection) {
-    console.log(userSelection);
     buildPlots(userSelection);
   }
   
-buildPlots("940");
+buildPlots();
