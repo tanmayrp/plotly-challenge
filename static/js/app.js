@@ -101,7 +101,7 @@ function buildBubbleChart(samples, selectedNameIndex){
  */
 function buildPlots(selectedName) {
   console.log("here");
-    d3.json("../samples.json").then((data) => {
+    d3.json("../plotly-challenge/samples.json").then((data) => {
         var names = data.names;
         var firstSample = names[0];
         var metadata = data.metadata;
