@@ -100,7 +100,6 @@ function buildBubbleChart(samples, selectedNameIndex){
  * @param {string} selectedName: selected name for the test subject; default 940
  */
 function buildPlots(selectedName) {
-  console.log("here");
     d3.json("../plotly-challenge/samples.json").then((data) => {
         var names = data.names;
         var firstSample = names[0];
